@@ -1,6 +1,8 @@
 .data-div-display{
-    /* display: flex;
-   flex-wrap: wrap; */
+    display: flex;
+    gap: 30px;
+    justify-content: space-evenly;
+   flex-wrap: wrap;
  
 }
 @media(max-width:834px){
