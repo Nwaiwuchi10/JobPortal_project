@@ -80,6 +80,9 @@ applicant:userId
 
     return (
         <><Navbar/>
+        <div style={{width:"95%", marginLeft:"auto", marginRight:"auto"}}>
+
+
         <div className='max-w-7xl mx-auto my-10'>
             
             <div className='flex items-center justify-between'>
@@ -109,6 +112,8 @@ applicant:userId
                 {/* <h1 className='font-bold my-1'>Posted Date: <span className='pl-4 font-normal text-gray-800'>{singleJobData?.createdAt.split("T")[0]}</span></h1> */}
             </div>
         </div>
+        </div>
+      
         
         </>
         

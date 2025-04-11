@@ -72,8 +72,8 @@ const CategoryCarousel = () => {
   };
 
   return (
-    <div className="w-full px-4 my-10">
-      <Carousel className="w-full max-w-6xl mx-auto">
+    <div className="w-full px-4 my-10  md:hidden">
+      <Carousel className="w-full max-w-6xl mx-auto ">
       <CarouselContent>
   {category.map((cat, index) => (
     <CarouselItem
