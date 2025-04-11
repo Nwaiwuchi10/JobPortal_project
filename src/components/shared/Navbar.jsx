@@ -141,12 +141,12 @@ const logoutHandlers=()=>{
                         {user && user.role === 'recruiter' ? (
                             <>
                                 <li><Link to="/admin/companies">Companies</Link></li>
-                                <li><Link to="/admin/jobs">Jobs</Link></li>
+                                <li><Link to="/">Jobs</Link></li>
                             </>
                         ) : (
                             <>
                                 <li><Link to="/">Home</Link></li>
-                                <li><Link to="/jobs">Jobs</Link></li>
+                                <li><Link to="/">Jobs</Link></li>
                                 <li><Link to="/browse">Browse</Link></li>
                             </>
                         )}
@@ -173,7 +173,7 @@ const logoutHandlers=()=>{
                                 <Button
                                     variant="ghost"
                                     className="w-full flex gap-2 items-center justify-start"
-                                    onClick={logoutHandler}
+                                    onClick={logoutHandlers}
                                 >
                                     <LogOut size={18} /> Logout
                                 </Button>
