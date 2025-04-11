@@ -4,25 +4,40 @@ import FilterCard from './FilterCard'
 import Job from './Job';
 import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
+import { JobsApi } from '@/data/Api';
+import axios from 'axios';
 
 // const jobsArray = [1, 2, 3, 4, 5, 6, 7, 8];
 
 const Jobs = () => {
-    const { allJobs, searchedQuery } = useSelector(store => store.job);
-    const [filterJobs, setFilterJobs] = useState(allJobs);
-
+    // const { allJobs, searchedQuery } = useSelector();
+    const [data, setData]=useState([])
+    console.log(data)
+    console.log("filteredJobs", filterJobs)
+    const [filterJobs, setFilterJobs] = useState(data);
     useEffect(() => {
-        if (searchedQuery) {
-            const filteredJobs = allJobs.filter((job) => {
-                return job.title.toLowerCase().includes(searchedQuery.toLowerCase()) ||
-                    job.description.toLowerCase().includes(searchedQuery.toLowerCase()) ||
-                    job.location.toLowerCase().includes(searchedQuery.toLowerCase())
-            })
-            setFilterJobs(filteredJobs)
-        } else {
-            setFilterJobs(allJobs)
-        }
-    }, [allJobs, searchedQuery]);
+        const fetchPosts = async () => {
+          const { data } = await axios.get(JobsApi);
+          console.log(data);
+         
+          setData(data);
+        };
+    
+        fetchPosts();
+      }, []);
+
+    // useEffect(() => {
+    //     if (searchedQuery) {
+    //         const filteredJobs = allJobs.filter((job) => {
+    //             return job.title.toLowerCase().includes(searchedQuery.toLowerCase()) ||
+    //                 job.description.toLowerCase().includes(searchedQuery.toLowerCase()) ||
+    //                 job.location.toLowerCase().includes(searchedQuery.toLowerCase())
+    //         })
+    //         setFilterJobs(filteredJobs)
+    //     } else {
+    //         setFilterJobs(allJobs)
+    //     }
+    // }, [allJobs, searchedQuery]);
 
     return (
         <div>

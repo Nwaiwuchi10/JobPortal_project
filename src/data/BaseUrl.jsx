@@ -1,0 +1,1 @@
+export const Base_Url = "https://jobportalapp-g2ll.onrender.com"

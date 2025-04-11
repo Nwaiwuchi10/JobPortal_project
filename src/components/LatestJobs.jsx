@@ -1,11 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import LatestJobCards from './LatestJobCards';
 import { useSelector } from 'react-redux'; 
+import axios from 'axios';
+import { JobsApi } from '../data/Api';
 
 // const randomJobs = [1, 2, 3, 4, 5, 6, 7, 8];
 
 const LatestJobs = () => {
-    const {allJobs} = useSelector(store=>store.job);
+    // const {allJobs} = useSelector(store=>store.job);
+        const [allJobs, setAllJobs]=useState([])
+        
+        
+        // const [allJobs, setAllJobs] = useState(data);
+        console.log("alljobs", allJobs)
+        useEffect(() => {
+            const fetchPosts = async () => {
+              const { data } = await axios.get(JobsApi);
+              console.log(data);
+             
+              setAllJobs(data);
+            };
+        
+            fetchPosts();
+          }, []);
+    
    
     return (
         <div className='max-w-7xl mx-auto my-20'>

@@ -11,7 +11,10 @@ import { setUser } from '@/redux/authSlice';
 import { toast } from 'sonner';
 
 const Navbar = () => {
-    const { user } = useSelector((store) => store.auth);
+    // const { user } = useSelector((store) => store.auth);
+    const user=localStorage.getItem("userId")
+    const firstName=localStorage.getItem("firstName")
+    const lastName=localStorage.getItem("lastName")
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,7 +32,13 @@ const Navbar = () => {
             toast.error(error.response?.data?.message || 'Logout failed');
         }
     };
-
+const logoutHandlers=()=>{
+    localStorage.setItem("userId", "")
+    localStorage.setItem("token", "")
+    localStorage.setItem("firstName","")
+    window.location.reload();
+    navigate("/")
+}
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
@@ -39,9 +48,9 @@ const Navbar = () => {
             <div className="flex items-center justify-between mx-auto max-w-7xl px-4 py-4">
                 {/* Logo */}
                 <div>
-                    <h1 className="text-2xl font-bold">
-                        Job<span className="text-[#F83002]">Portal</span>
-                    </h1>
+                 
+                <Link to="/" ><h1 className="text-2xl font-bold">  Job<span className="text-[#F83002]">Portal</span>
+                </h1></Link>   
                 </div>
 
                 {/* Hamburger Icon */}
@@ -54,10 +63,17 @@ const Navbar = () => {
                 {/* Links & Avatar */}
                 <div className="hidden md:flex items-center gap-12">
                     <ul className="flex font-medium items-center gap-5">
-                        {user && user.role === 'recruiter' ? (
+                        {user  ? (
                             <>
                                 <li><Link to="/admin/companies">Companies</Link></li>
                                 <li><Link to="/admin/jobs">Jobs</Link></li>
+                               <li>{firstName}-{lastName} </li>
+                                <li> <div className="flex items-center gap-2">
+                                            {/* <LogOut /> */}
+                                            <Button onClick={logoutHandlers} variant="link">
+                                                Logout
+                                            </Button>
+                                        </div></li>
                             </>
                         ) : (
                             <>
@@ -79,34 +95,34 @@ const Navbar = () => {
                         </div>
                     ) : (
                         <Popover>
-                            <PopoverTrigger asChild>
+                            {/* <PopoverTrigger asChild>
                                 <Avatar className="cursor-pointer">
                                     <AvatarImage src={user?.profile?.profilePhoto} alt="@user" />
                                 </Avatar>
-                            </PopoverTrigger>
+                            </PopoverTrigger> */}
                             <PopoverContent className="w-80">
                                 <div className="space-y-2">
                                     <div className="flex gap-2">
-                                        <Avatar>
+                                        {/* <Avatar>
                                             <AvatarImage src={user?.profile?.profilePhoto} alt="@user" />
-                                        </Avatar>
+                                        </Avatar> */}
                                         <div>
-                                            <h4 className="font-medium">{user?.fullname}</h4>
+                                            <h4 className="font-medium">{firstName}-{lastName}</h4>
                                             <p className="text-sm text-muted-foreground">{user?.profile?.bio}</p>
                                         </div>
                                     </div>
                                     <div className="flex flex-col text-gray-600">
-                                        {user.role === 'student' && (
+                                        {/* {user.role === 'student' && (
                                             <div className="flex items-center gap-2">
                                                 <User2 />
                                                 <Link to="/profile">
                                                     <Button variant="link">View Profile</Button>
                                                 </Link>
                                             </div>
-                                        )}
+                                        )} */}
                                         <div className="flex items-center gap-2">
-                                            <LogOut />
-                                            <Button onClick={logoutHandler} variant="link">
+                                            {/* <LogOut /> */}
+                                            <Button onClick={logoutHandlers} variant="link">
                                                 Logout
                                             </Button>
                                         </div>

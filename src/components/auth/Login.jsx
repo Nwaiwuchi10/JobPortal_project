@@ -16,7 +16,7 @@ const Login = () => {
     const [input, setInput] = useState({
         email: "",
         password: "",
-        role: "",
+        // role: "",
     });
     const { loading,user } = useSelector(store => store.auth);
     const navigate = useNavigate();
@@ -29,30 +29,36 @@ const Login = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
-            dispatch(setLoading(true));
-            const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
+            // dispatch(setLoading(true));
+            const res = await axios.post("https://jobportalapp-g2ll.onrender.com/api/auth/login/",
+                 input, {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                withCredentials: true,
+                // withCredentials: true,
             });
-            if (res.data.success) {
+            if (res.data) {
                 dispatch(setUser(res.data.user));
                 navigate("/");
+                localStorage.setItem("userId", res.data.user._id)
+                localStorage.setItem("firstName", res.data.user.firstName)
+                localStorage.setItem("lastName", res.data.user.lastName)
+                localStorage.setItem("token", res.data.token)
                 toast.success(res.data.message);
             }
         } catch (error) {
             console.log(error);
             toast.error(error.response.data.message);
-        } finally {
-            dispatch(setLoading(false));
-        }
+        } 
+        // finally {
+        //     dispatch(setLoading(false));
+        // }
     }
-    useEffect(()=>{
-        if(user){
-            navigate("/");
-        }
-    },[])
+    // useEffect(()=>{
+    //     if(user){
+    //         navigate("/");
+    //     }
+    // },[])
     return (
         <div>
             <Navbar />
@@ -80,7 +86,7 @@ const Login = () => {
                             placeholder="patel@gmail.com"
                         />
                     </div>
-                    <div className='flex items-center justify-between'>
+                    {/* <div className='flex items-center justify-between'>
                         <RadioGroup className="flex items-center gap-4 my-5">
                             <div className="flex items-center space-x-2">
                                 <Input
@@ -105,7 +111,7 @@ const Login = () => {
                                 <Label htmlFor="r2">Recruiter</Label>
                             </div>
                         </RadioGroup>
-                    </div>
+                    </div> */}
                     {
                         loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' /> Please wait </Button> : <Button type="submit" className="w-full my-4">Login</Button>
                     }
