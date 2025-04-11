@@ -129,7 +129,7 @@ const LatestJobs = () => {
             <div className='data-div-display'>
                 {displayJobs.length === 0
                     ? <span>No Job Available</span>
-                    : displayJobs.slice(0, 6).map(job => (
+                    : displayJobs.slice(0, 10).map(job => (
                         <LatestJobCards key={job._id} job={job} />
                     ))
                 }
