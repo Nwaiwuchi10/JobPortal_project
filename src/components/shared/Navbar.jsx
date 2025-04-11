@@ -66,7 +66,7 @@ const logoutHandlers=()=>{
                         {user  ? (
                             <>
                                 <li><Link to="/admin/companies">Companies</Link></li>
-                                <li><Link to="/admin/jobs">Jobs</Link></li>
+                                <li><Link to="/">Jobs</Link></li>
                                <li>{firstName}-{lastName} </li>
                                 <li> <div className="flex items-center gap-2">
                                             {/* <LogOut /> */}
@@ -78,7 +78,7 @@ const logoutHandlers=()=>{
                         ) : (
                             <>
                                 <li><Link to="/">Home</Link></li>
-                                <li><Link to="/jobs">Jobs</Link></li>
+                                <li><Link to="/">Jobs</Link></li>
                                 <li><Link to="/browse">Browse</Link></li>
                             </>
                         )}
